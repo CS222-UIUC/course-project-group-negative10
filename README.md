@@ -1,41 +1,43 @@
-Title: Comp
-
-Pitch
+# Comp
 
 Developers aren’t always aware of how their app is performing in comparison to their competitors. Our website will allow app developers to track how their app is performing on the app store by ranking the app amongst its competitors based on certain keywords. 
 
-Functionality
-Users can see what place their app ranks on certain keywords
-Users can see how their competitors rank on certain keywords
-Users can track their performance history
-Users can create an account to register their app
-Users can export their data in csv format
-Users can run sentiment analysis on the reviews of their app
-Users can see the predicted number of downloads for their app
+## Functionality
+- Users can see what place their app ranks on certain keywords
+- Users can see how their competitors rank on certain keywords
+- Users can track their performance history
+- Users can create an account to register their app
+- Users can export their data in csv format
+- Users can run sentiment analysis on the reviews of their app
+- Users can see the predicted number of downloads for their app
 
-Components
+## Components
 
-Functionality
-Our first component involves the user creating their account and having the login information (username and password) stored in MongoDB for future authentication.
-The second component involves retrieving app performance data from Google Play/App Store APIs using Django. We will use the Django REST framework for creating the api which the frontend will interact with. The historical ranking information for the performance will be stored in MongoDB.
-The third component involves graphing the data and displaying it in a line graph using Matplotlib and HTML.
-The fourth component involves exporting user data to csv format using Pandas library so users are able to view and analyze data using external software.
-The fifth component allows users to run sentiment analysis to better understand whether the tone of the user-created reviews are more negative or positive using the NTLK library.
-The sixth component allows the user to view the forecasted future number of downloads based on previous trends using the Sk-learn library.
-Programming Languages
-Python
-Javascript
-SQL/noSQL(PHP)
-Major Libraries Used
-We plan on using React for frontend development and will incorporate Angular.js and Vue.js if necessary.
-NLTK (Python for sentiment analysis on reviews) will allow users to see trends in customer reviews.
-Sk-learn will be helpful for forecasting future download amounts.
-With Pandas, the user will be able to export the data to a csv file.
-Testing Methodology
-By implementing CI/CD we can deliver code in an agile environment that allows us to continuously and efficiently build, test, and deliver. The CI/CD pipeline would also allow us to efficiently implement new features and fix bugs.
-Testing library: Since Javascript and Python are the main languages in our project, we will be using Jenkins and Pytest respectively for unit testing, since it allows us to efficiently test our code. Both Jenkins and Pytest have plugins for computing testing coverage. We will follow the camelCase style guide. We plan on creating test cases for each functionality to guarantee that the individual parts of the project are working before we begin integration testing. We will proceed with integration tests by writing tests that assess how each function interacts with the other components of the project and how it varies with each component. In addition, we want to make sure to write tests for the edge cases and make sure that each individual case works. 
-Whenever someone submits a pull request, we will review it together as a team and see if it is compatible with the components that we are working on individually. We will leave comments, leave feedback, and make changes when necessary. 
-Interactions With Other Components
+### Functionality
+- Our first component involves the user creating their account and having the login information (username and password) stored in MongoDB for future authentication.
+- The second component involves retrieving app performance data from Google Play/App Store APIs using Django. We will use the Django REST framework for creating the api which the frontend will interact with. The historical ranking information for the performance will be stored in MongoDB.
+- The third component involves graphing the data and displaying it in a line graph using Matplotlib and HTML.
+- The fourth component involves exporting user data to csv format using Pandas library so users are able to view and analyze data using external software.
+- The fifth component allows users to run sentiment analysis to better understand whether the tone of the user-created reviews are more negative or positive using the NTLK library.
+- The sixth component allows the user to view the forecasted future number of downloads based on previous trends using the Sk-learn library.
+
+### Programming Languages
+- Python
+- Javascript
+- SQL/noSQL(PHP)
+
+### Major Libraries Used
+- We plan on using React for frontend development and will incorporate Angular.js and Vue.js if necessary.
+- NLTK (Python for sentiment analysis on reviews) will allow users to see trends in customer reviews.
+- Sk-learn will be helpful for forecasting future download amounts.
+- With Pandas, the user will be able to export the data to a csv file.
+
+### Testing Methodology
+- By implementing CI/CD we can deliver code in an agile environment that allows us to continuously and efficiently build, test, and deliver. The CI/CD pipeline would also allow us to efficiently implement new features and fix bugs.
+- Testing library: Since Javascript and Python are the main languages in our project, we will be using Jenkins and Pytest respectively for unit testing, since it allows us to efficiently test our code. Both Jenkins and Pytest have plugins for computing testing coverage. We will follow the camelCase style guide. We plan on creating test cases for each functionality to guarantee that the individual parts of the project are working before we begin integration testing. We will proceed with integration tests by writing tests that assess how each function interacts with the other components of the project and how it varies with each component. In addition, we want to make sure to write tests for the edge cases and make sure that each individual case works. 
+- Whenever someone submits a pull request, we will review it together as a team and see if it is compatible with the components that we are working on individually. We will leave comments, leave feedback, and make changes when necessary. 
+
+### Interactions With Other Components
 GET https://api.appstoreconnect.apple.com/v1/apps/{id}/perfPowerMetrics
 
 
