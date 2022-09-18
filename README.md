@@ -42,49 +42,57 @@ GET https://api.appstoreconnect.apple.com/v1/apps/{id}/perfPowerMetrics
 
 ## Schedule
 Week 1:
-Create an organized github repo
-Create a Figma page to determine layout of website
-Create a very basic website with react + django.
-Learn and configure docker environment on all our ends
+- Create an organized github repo
+- Create a Figma page to determine layout of website
+- Create a very basic website with react + django.
+- Learn and configure docker environment on all our ends
+
 Week 2:
-Backend:
-Add ability to pull data from the play/app store apis.
-Ranking for keywords
-Reviews
-Download count
-Set up user account management via mongoDB
-Frontend:
-Create page for user login
-Create the layout for the table
+- Backend:
+  - Add ability to pull data from the play/app store apis.
+    - Ranking for keywords
+    - Reviews
+    - Download count
+  - Set up user account management via mongoDB
+- Frontend:
+  - Create page for user login
+  - Create the layout for the table
+
 Week 3:
-Backend:
-Add the ability to send ranking data to the frontend.
-Frontend:
-Receive and display ranking data.
+- Backend:
+  - Add the ability to send ranking data to the frontend.
+- Frontend:
+  - Receive and display ranking data.
+
 Week 4:
-Backend:
-Ability to run sentiment analysis on an apps reviews
-Frontend:
-Create UI to display sentiment analysis results and app reviews
+- Backend:
+  - Ability to run sentiment analysis on an apps reviews
+- Frontend:
+  - Create UI to display sentiment analysis results and app reviews
+
+
 Week 5:
-Backend:
-Store app name/links along with the users login data
-Export review(sentiment analysis) and ranking data to csv
-Frontend:
-Create UI components for a user to add their app into the system
-Create UI for downloading data in csv
+- Backend:
+  - Store app name/links along with the users login data
+  - Export review(sentiment analysis) and ranking data to csv
+- Frontend:
+  - Create UI components for a user to add their app into the system
+  - Create UI for downloading data in csv
+
 Week 6:
-Backend:
-Forecast future app downloads
-Frontend:
-UI to view historical download counts in a graph and see future predictions
+- Backend:
+  - Forecast future app downloads
+- Frontend:
+  - UI to view historical download counts in a graph and see future predictions
+
 Week 7:
-Have random users test the website to make sure it is fully functioning and every component is working together properly
-Frontend:
-Create a landing page for our website where viewers can view information about what our application does.
+- Have random users test the website to make sure it is fully functioning and every component is working together properly
+- Frontend:
+  - Create a landing page for our website where viewers can view information about what our application does.
+
 Week 8:
-Finalize presentable website, do lots of testing and debugging
-Put together a presentation/demo
+- Finalize presentable website, do lots of testing and debugging
+- Put together a presentation/demo
 
 
 ## Risks
