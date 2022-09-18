@@ -41,12 +41,12 @@ Developers aren’t always aware of how their app is performing in comparison to
 GET https://api.appstoreconnect.apple.com/v1/apps/{id}/perfPowerMetrics
 
 ## Schedule
-1.
+Week 1:
 Create an organized github repo
 Create a Figma page to determine layout of website
 Create a very basic website with react + django.
 Learn and configure docker environment on all our ends
-2.
+Week 2:
 Backend:
 Add ability to pull data from the play/app store apis.
 Ranking for keywords
@@ -56,35 +56,36 @@ Set up user account management via mongoDB
 Frontend:
 Create page for user login
 Create the layout for the table
-3.
+Week 3:
 Backend:
 Add the ability to send ranking data to the frontend.
 Frontend:
 Receive and display ranking data.
-4.
+Week 4:
 Backend:
 Ability to run sentiment analysis on an apps reviews
 Frontend:
 Create UI to display sentiment analysis results and app reviews
-5.
+Week 5:
 Backend:
 Store app name/links along with the users login data
 Export review(sentiment analysis) and ranking data to csv
 Frontend:
 Create UI components for a user to add their app into the system
 Create UI for downloading data in csv
-6.
+Week 6:
 Backend:
 Forecast future app downloads
 Frontend:
 UI to view historical download counts in a graph and see future predictions
-7.
+Week 7:
 Have random users test the website to make sure it is fully functioning and every component is working together properly
 Frontend:
 Create a landing page for our website where viewers can view information about what our application does.
-8.
+Week 8:
 Finalize presentable website, do lots of testing and debugging
 Put together a presentation/demo
+
 
 ## Risks
 One possible risk would be poor API support from the play/app stores. To resolve this issue we will have to write our own application to scrape the app stores. This could take up to a week. We may have to adjust our schedule and remove some of the additional features as a result.
