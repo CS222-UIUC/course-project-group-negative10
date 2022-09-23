@@ -15,6 +15,7 @@ django-cors-headers = "*"
 dj-database-url = "*"
 whitenoise = "*"
 gunicorn = "*"
+google-play-scraper = "*"
 
 [dev-packages]
 coverage = "*"
