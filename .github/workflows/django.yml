@@ -31,6 +31,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Super-Linter
       uses: github/super-linter@v4.9.6
       env:
