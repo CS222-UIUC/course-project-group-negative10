@@ -2,26 +2,29 @@ import {useState} from 'react';
 import logo from '../logo.svg';
 import axios from "axios";
 import './App.scss';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
-
-const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
-
-const renderLineChart = (
-  <LineChart width={600} height={300} data={data}>
-    <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-    <CartesianGrid stroke="#ccc" />
-    <XAxis dataKey="name" />
-    <YAxis />
-  </LineChart>
-);
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip} from 'recharts';
 
 function App() {
   const [textInput, setTextInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
+  const [myData, setMyData] = useState();
+
+  const renderLineChart = (
+    <ResponsiveContainer width="100%" height={400}>
+        <LineChart data={myData}>
+            <Line type="monotone" dataKey="rating" stroke="#8884d8" />
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <XAxis dataKey="date" />
+            <YAxis dataKey="rating" />
+            <Tooltip />
+        </LineChart>
+    </ResponsiveContainer>
+  );
 
   const handleSubmit = () => {
     axios.get(`/api/getReviews?text=${textInput}`).then(res => {
-      setOutput(res.data.text);
+      console.log(res.data.text);
+      setMyData(JSON.parse((res.data.text))['reviews']);
     }).catch(err => console.log(err));
   };
 
@@ -37,7 +40,7 @@ function App() {
         <div>
           {renderLineChart}
           <p>Test connection with API:</p>
-          <label htmlFor="char-input">Make this text uppercase: </label>
+          <label htmlFor="char-input">Get reviews for app (ex: com.ticktick.task): </label>
           <input
             id="char-input" type="text" value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
