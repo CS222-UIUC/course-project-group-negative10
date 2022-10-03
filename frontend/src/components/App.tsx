@@ -20,7 +20,7 @@ function App() {
   const [output, setOutput] = useState<string>("");
 
   const handleSubmit = () => {
-    axios.get(`/api/test?text=${textInput}`).then(res => {
+    axios.get(`/api/getReviews?text=${textInput}`).then(res => {
       setOutput(res.data.text);
     }).catch(err => console.log(err));
   };
