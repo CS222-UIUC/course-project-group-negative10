@@ -5,7 +5,7 @@ from google_play_scraper import app, reviews, Sort
 from collections import defaultdict
 import datetime
 import json
-
+import spacy
 class SimpleAPIView(APIView):
     def get(self, request):
         text = request.query_params.get('text', '')
@@ -28,7 +28,7 @@ class getReviews(APIView):
             # count=100, # defaults to 100
             # filter_score_with=5 # defaults to None(means all score)
         )
-
+        nlp = spacy.load("en_core_web_trf")
         review_data = defaultdict(list)
         for review in reversed(result):
             day = review['at'].strftime('%Y-%m-%d')

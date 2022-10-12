@@ -1,10 +1,10 @@
 # Use image with both python and node installed
 FROM nikolaik/python-nodejs:python3.10-nodejs14-alpine
 
-WORKDIR /app/backend
+WORKDIR /app/src/backend
 
 # Install required libraries and Python dependencies
-COPY ./backend/requirements.txt /app/backend
+COPY ./venv/requirements.txt /app/src/backend
 RUN  \
     apk update && \
     apk upgrade && \
@@ -14,19 +14,19 @@ RUN  \
     apk --purge del .build-deps
 
 # Add the rest of the code
-COPY ./backend /app/backend
+COPY ./backend /app/src/backend
 
 # Copy scripts to main directory
 COPY ./backend/scripts/ /app/
 
 # Install frontend dependencies
-WORKDIR /app/frontend
+WORKDIR /app/src/frontend
 
-COPY ./frontend/package.json ./frontend/yarn.lock /app/frontend/
+COPY ./frontend/package.json ./frontend/yarn.lock /app/src/frontend/
 RUN npm install
 
 # Add the rest of the code
-COPY ./frontend /app/frontend
+COPY ./frontend /app/src/frontend
 
 # Build react static files
 RUN npm run build
