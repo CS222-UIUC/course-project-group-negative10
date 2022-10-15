@@ -27,7 +27,7 @@ jobs:
         pip install -r venv/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python ./tests/tests.py test
   lint:
     runs-on: ${{ matrix.os }}
     steps:

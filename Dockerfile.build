@@ -14,19 +14,19 @@ RUN  \
     apk --purge del .build-deps
 
 # Add the rest of the code
-COPY ./backend /app/src/backend
+COPY ./src/backend /app/src/backend
 
 # Copy scripts to main directory
-COPY ./backend/scripts/ /app/
+COPY ./src/backend/scripts/ /app/
 
 # Install frontend dependencies
 WORKDIR /app/src/frontend
 
-COPY ./frontend/package.json ./frontend/yarn.lock /app/src/frontend/
+COPY ./src/frontend/package.json ./src/frontend/yarn.lock /app/src/frontend/
 RUN npm install
 
 # Add the rest of the code
-COPY ./frontend /app/src/frontend
+COPY ./src/frontend /app/src/frontend
 
 # Build react static files
 RUN npm run build
