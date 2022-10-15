@@ -1,4 +1,4 @@
-![Tests](https://github.com/CS222-UIUC/course-project-group-negative10/blob/restructuring/.github/workflows/django.yml/badge.svg)
+![Tests](https://github.com/CS222-UIUC/course-project-group-negative10/actions/workflows/django.yml/badge.svg)
 
 # Comp
 
