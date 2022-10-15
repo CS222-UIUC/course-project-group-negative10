@@ -5,7 +5,7 @@ services:
     container_name: backend
     build: ./src/backend
     volumes:
-      - ./backend:/app/src/backend
+      - ./src/backend:/app/src/backend
     ports:
       - "8000:8000"
     stdin_open: true
@@ -19,7 +19,7 @@ services:
     container_name: frontend
     build: ./src/frontend
     volumes:
-      - ./frontend:/app/src/frontend
+      - ./src/frontend:/app/src/frontend
       - node-modules:/app/src/frontend/node_modules
     ports:
       - "3000:3000"
