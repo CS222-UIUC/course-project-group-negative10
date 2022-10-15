@@ -1,3 +1,5 @@
+![Tests](https://github.com/CS222-UIUC/course-project-group-negative10/blob/restructuring/.github/workflows/django.yml/badge.svg)
+
 # Comp
 
 Developers aren’t always aware of how their app is performing in comparison to their competitors. Our website will allow app developers to track how their app is performing on the app store by ranking the app amongst its competitors based on certain keywords. 
