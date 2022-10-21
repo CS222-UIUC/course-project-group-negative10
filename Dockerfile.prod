@@ -1,16 +1,16 @@
 # Use image with both python and node installed
 FROM nikolaik/python-nodejs:python3.10-nodejs14
 
-WORKDIR /app/backend
+WORKDIR /app/src/backend
 
 # Install Python dependencies
-COPY ./backend/requirements.txt /app/backend/
+COPY ./backend/requirements.txt /app/src/backend/
 RUN pip3 install --upgrade pip -r requirements.txt
 
 # Install frontend dependencies
-WORKDIR /app/frontend
+WORKDIR /app/src/frontend
 
-COPY ./frontend/package.json ./frontend/yarn.lock /app/frontend/
+COPY ./frontend/package.json ./frontend/yarn.lock /app/src/frontend/
 RUN npm install
 
 # Add the rest of the code
@@ -21,7 +21,7 @@ COPY ./backend/scripts/ /app/
 RUN npm run build
 
 # Move all static files other than index.html to root/ for whitenoise middleware
-WORKDIR /app/frontend/build
+WORKDIR /app/src/frontend/build
 
 RUN mkdir root  \
     && mv *.ico *.json root  \
