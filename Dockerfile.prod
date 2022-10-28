@@ -4,7 +4,7 @@ FROM nikolaik/python-nodejs:python3.10-nodejs14
 WORKDIR /app/src/backend
 
 # Install Python dependencies
-COPY ./src/backend/requirements.txt /app/src/backend/
+COPY ./venv/requirements.txt /app/src/backend/
 RUN pip3 install --upgrade pip -r requirements.txt
 
 # Install frontend dependencies
