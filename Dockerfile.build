@@ -23,15 +23,15 @@ COPY ./src/backend/scripts/ /app/
 WORKDIR /app/src/frontend
 
 COPY ./src/frontend/package.json ./src/frontend/yarn.lock /app/src/frontend/
-RUN npm install
+RUN yarn install
 
 # Add the rest of the code
 COPY ./src/frontend /app/src/frontend
 
 # Build react static files
-RUN npm run build
+RUN yarn run build
 
-# Move non-static files to newly created dir (/app/frontend/build/root/)
+# Move non-static files to newly created dir (/app/src/frontend/build/root/)
 RUN cd build && mkdir root && mv *.ico *.json root
 
 # Collect static files
