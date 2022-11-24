@@ -21,7 +21,7 @@ COPY ./src/backend/scripts/ /app/
 RUN npm run build
 
 # Move all static files other than index.html to root/ for whitenoise middleware
-WORKDIR /app/frontend/build
+WORKDIR /app/frontend/public
 
 RUN mkdir root  \
     && mv *.ico *.json root  \
