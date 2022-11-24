@@ -1,7 +1,7 @@
 # Use an official node runtime as a parent image - Build stage
 FROM node:14.17.5-alpine as build-image
 
-WORKDIR /app/src/frontend
+WORKDIR /app/frontend
 
 COPY package.json .
 
@@ -15,10 +15,10 @@ RUN \
 # Use an official node runtime as a parent image - Runtime
 FROM node:14.17.5-alpine as runtime
 
-WORKDIR /app/src/frontend
+WORKDIR /app/frontend
 
 # copy node_modules from build stage
-COPY --from=build-image /app/src/frontend/node_modules /app/src/frontend/node_modules
+COPY --from=build-image /app/frontend/node_modules /app/frontend/node_modules
 
 # copy rest of source code
 COPY . .

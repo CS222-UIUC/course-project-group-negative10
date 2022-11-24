@@ -32,7 +32,7 @@ RUN  \
     rm -rf /var/cache/apk/*
 
 # Add the rest of the code
-COPY . /app/src/backend
+COPY . /app/backend
 COPY ./scripts/ /app/
 
 # Make port 8000 available for the app
@@ -40,7 +40,7 @@ ENV PORT 8000
 EXPOSE 8000
 
 # Change directory so that scripts could locate manage.py
-WORKDIR /app/src/backend
+WORKDIR /app/backend
 
 # Be sure to use 0.0.0.0 for the host within the Docker container,
 # otherwise the browser won't be able to find it
