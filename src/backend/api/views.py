@@ -5,9 +5,9 @@ from google_play_scraper import app, reviews, Sort
 from collections import defaultdict
 import datetime
 import json
-from spacytextblob.spacytextblob import SpacyTextBlob
-from bs4 import BeautifulSoup
-import requests
+#from spacytextblob.spacytextblob import SpacyTextBlob
+#from bs4 import BeautifulSoup
+#import requests
 class SimpleAPIView(APIView):
     def get(self, request):
         text = request.query_params.get('text', '')
@@ -44,7 +44,7 @@ class getReviews(APIView):
         
         final_reviews = {'reviews': review_data_average_list}
         return Response({"text": json.dumps(final_reviews)}, status=status.HTTP_200_OK)
-def NLP(self, request):
+"""def NLP(self, request):
         app_name = request.query_params.get('text', '')
         result = reviews_all(
             app_name,
@@ -65,4 +65,4 @@ def NLP(self, request):
         for score in sentiment:
             overall += score
 
-        overall = overall * 100 / len(sentiment) # sentiment %
+        overall = overall * 100 / len(sentiment)""" # sentiment %
