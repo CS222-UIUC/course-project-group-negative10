@@ -11,7 +11,7 @@ RUN pip3 install --upgrade pip -r requirements.txt
 WORKDIR /app/frontend
 
 COPY ./src/frontend/package.json ./src/frontend/yarn.lock /app/frontend/
-RUN npm install
+RUN yarn install
 
 # Add the rest of the code
 COPY . /app/
@@ -19,7 +19,7 @@ COPY ./src/frontend /app/frontend
 COPY ./src/backend/scripts/ /app/
 
 # Build static files
-RUN npm run build
+RUN yarn run build
 
 # Move all static files other than index.html to root/ for whitenoise middleware
 WORKDIR /app/frontend/build
