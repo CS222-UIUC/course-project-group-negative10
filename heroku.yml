@@ -12,5 +12,5 @@ release:
 run:
   web:
     command:
-      - cd backend && gunicorn core.wsgi:application
+      - cd src/backend && gunicorn core.wsgi:application
     image: web
