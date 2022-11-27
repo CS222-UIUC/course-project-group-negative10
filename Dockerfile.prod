@@ -10,11 +10,12 @@ RUN pip3 install --upgrade pip -r requirements.txt
 # Install frontend dependencies
 WORKDIR /app/frontend
 
-COPY ./src/frontend/public ./src/frontend/package.json ./src/frontend/yarn.lock /app/frontend/
+COPY ./src/frontend/package.json ./src/frontend/yarn.lock /app/frontend/
 RUN npm install
 
 # Add the rest of the code
 COPY . /app/
+COPY ./src/frontend /app/frontend
 COPY ./src/backend/scripts/ /app/
 
 # Build static files
