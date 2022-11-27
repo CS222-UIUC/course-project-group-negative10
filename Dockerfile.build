@@ -31,7 +31,7 @@ COPY ./src/frontend /app/frontend
 # Build react static files
 RUN yarn run build
 
-# Move non-static files to newly created dir (/app/src/frontend/build/root/)
+# Move non-static files to newly created dir (/app/frontend/build/root/)
 RUN cd build && mkdir root && mv *.ico *.json root
 
 # Collect static files
