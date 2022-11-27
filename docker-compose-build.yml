@@ -1,4 +1,4 @@
-version: "3.10"
+version: "3.7"
 
 services:
   app:
@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.build
     volumes:
-      - ./src/backend:/app/backend
+      - ./src/backend:/app/src/backend
     ports:
       - "8000:8000"
     stdin_open: true
