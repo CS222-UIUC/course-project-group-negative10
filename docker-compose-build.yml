@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.build
     volumes:
-      - ./src/backend:/app/src/backend
+      - ./src/backend:/app/backend
     ports:
       - "8000:8000"
     stdin_open: true
