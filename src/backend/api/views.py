@@ -1,13 +1,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from google_play_scraper import app, reviews, Sort
+from google_play_scraper import app, reviews, Sort, reviews_all
 from collections import defaultdict
 import datetime
 import json
-#from spacytextblob.spacytextblob import SpacyTextBlob
-#from bs4 import BeautifulSoup
-#import requests
+import en_core_web_sm
+from spacytextblob.spacytextblob import SpacyTextBlob
+from bs4 import BeautifulSoup
+import requests
 class SimpleAPIView(APIView):
     def get(self, request):
         text = request.query_params.get('text', '')
@@ -44,7 +45,7 @@ class getReviews(APIView):
         
         final_reviews = {'reviews': review_data_average_list}
         return Response({"text": json.dumps(final_reviews)}, status=status.HTTP_200_OK)
-"""def NLP(self, request):
+def NLP(self, request):
         app_name = request.query_params.get('text', '')
         result = reviews_all(
             app_name,
@@ -54,7 +55,7 @@ class getReviews(APIView):
             sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
             #filter_score_with=5 defaults to None(means all score)
         )  
-        nlp = spacy.load("en_core_web_trf")
+        nlp = en_core_web_sm.load()
         nlp.add_pipe('spacytextblob')
         sentiment = []
         for review in result:
@@ -65,4 +66,4 @@ class getReviews(APIView):
         for score in sentiment:
             overall += score
 
-        overall = overall * 100 / len(sentiment)""" # sentiment %
+        overall = overall * 100 / len(sentiment) # sentiment %
