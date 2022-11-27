@@ -5,7 +5,7 @@ from google_play_scraper import app, reviews, Sort, reviews_all
 from collections import defaultdict
 import datetime
 import json
-import spacy
+import en_core_web_sm
 from spacytextblob.spacytextblob import SpacyTextBlob
 from bs4 import BeautifulSoup
 import requests
@@ -55,7 +55,7 @@ def NLP(self, request):
             sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
             #filter_score_with=5 defaults to None(means all score)
         )  
-        nlp = spacy.load("en_core_web_sm")
+        nlp = en_core_web_sm.load()
         nlp.add_pipe('spacytextblob')
         sentiment = []
         for review in result:
