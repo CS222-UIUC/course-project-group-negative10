@@ -5,10 +5,10 @@ from google_play_scraper import app, reviews, Sort, reviews_all
 from collections import defaultdict
 import datetime
 import json
-import en_core_web_sm
-from spacytextblob.spacytextblob import SpacyTextBlob
 from bs4 import BeautifulSoup
 import requests
+from nltk.sentiment import SentimentIntensityAnalyzer
+
 class SimpleAPIView(APIView):
     def get(self, request):
         text = request.query_params.get('text', '')
@@ -45,25 +45,27 @@ class getReviews(APIView):
         
         final_reviews = {'reviews': review_data_average_list}
         return Response({"text": json.dumps(final_reviews)}, status=status.HTTP_200_OK)
-def NLP(self, request):
-        app_name = request.query_params.get('text', '')
-        result = reviews_all(
-            app_name,
-            sleep_milliseconds=0, # defaults to 0
-            lang='en', # defaults to 'en'
-            country='us', # defaults to 'us'
-            sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
-            #filter_score_with=5 defaults to None(means all score)
-        )  
-        nlp = en_core_web_sm.load()
-        nlp.add_pipe('spacytextblob')
-        sentiment = []
-        for review in result:
-            doc = nlp(review['content'])
-            sentiment.append(doc._.blob.polarity)
-        
-        overall = 0
-        for score in sentiment:
-            overall += score
 
-        overall = overall * 100 / len(sentiment) # sentiment %
+class NLP(APIView):
+    def get(self, request):
+            app_name = request.query_params.get('text', '')
+            result = reviews_all(
+                app_name,
+                sleep_milliseconds=0, # defaults to 0
+                lang='en', # defaults to 'en'
+                country='us', # defaults to 'us'
+                sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
+                #filter_score_with=5 defaults to None(means all score)
+            )  
+            sia = SentimentIntensityAnalyzer()
+            sentiment = []
+            overall = 0
+            for review in result:
+                score = sia.polarity_scores(review['content'])['compound']
+                sentiment.append(score)
+                overall += score
+
+            overall = overall * 100 / len(sentiment) # sentiment %
+
+            return Response({"polarity": overall}, status=status.HTTP_200_OK)
+
