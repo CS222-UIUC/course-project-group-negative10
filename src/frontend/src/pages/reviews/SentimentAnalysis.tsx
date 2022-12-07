@@ -1,20 +1,30 @@
 import {useState} from 'react';
 import axios from "axios";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip} from 'recharts';
 
-function ViewReviews() {
+function SentimentAnalysis() {
   type Props = {};
 
   const [textInput, setTextInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
+  const [myData, setMyData] = useState();
 
-  const reviews = (
-    <label htmlFor={output}>\n</label>
+  const renderLineChart = (
+    <ResponsiveContainer width="100%" height={400}>
+        <LineChart data={myData}>
+            <Line type="monotone" dataKey="sentiment" stroke="#8884d8" />
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <XAxis dataKey="date" />
+            <YAxis dataKey="Sentiment Score" domain={[0, 1]} />
+            <Tooltip />
+        </LineChart>
+    </ResponsiveContainer>
   );
   
   const handleSubmit = () => {
     axios.get(`/api/NLP?text=${textInput}`).then((res: any) => {
-      console.log(res.data.polarity);
-      setOutput(res.data.polarity);
+      console.log(res.data.text);
+      setMyData(JSON.parse((res.data.text))['sentiments']);
     }).catch((err: any) => console.log(err));
   };
 
@@ -22,15 +32,13 @@ function ViewReviews() {
     <div className="App">
     <header className="App-header">
       <div>
-        {reviews}
-        <br></br>
+        {renderLineChart}
         <label htmlFor="char-input">Sentiment analysis on reviews for app (ex: com.ticktick.task): </label>
         <input
           id="char-input" type="text" value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
         />
         <button onClick={handleSubmit}>Submit</button>
-        <h3>{output}</h3>
       </div>
     </header>
   </div>
@@ -38,4 +46,4 @@ function ViewReviews() {
 }
 
 
-export default ViewReviews;
+export default SentimentAnalysis;

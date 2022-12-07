@@ -3,7 +3,7 @@ import HomePage from "../pages/home/HomePage";
 import { RouteType } from "./config";
 import ReviewsOverTime from "../pages/reviews/ReviewsOverTime";
 import SettingsPage from "../pages/settings/SettingsPage";
-import ViewReviews from "../pages/reviews/ViewReviews";
+import SentimentAnalysis from "../pages/reviews/SentimentAnalysis";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
@@ -44,11 +44,11 @@ const appRoutes: RouteType[] = [
         },
       },
       {
-        path: "/reviews/ViewReviews",
-        element: <ViewReviews />,
-        state: "dashboard.ViewReviews",
+        path: "/reviews/sentimentAnalysis",
+        element: <SentimentAnalysis />,
+        state: "dashboard.SentimentAnalysis",
         sidebarProps: {
-          displayText: "View Reviews"
+          displayText: "Sentiment Analysis"
         }
       }
     ]

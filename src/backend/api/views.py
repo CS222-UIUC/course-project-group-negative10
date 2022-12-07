@@ -30,7 +30,7 @@ class getReviews(APIView):
             # lang='en', # defaults to 'en'
             # country='us', # defaults to 'us'
             # sort=Sort.NEWEST, # defaults to Sort.NEWEST
-            # count=100, # defaults to 100
+            count=300, # defaults to 100
             # filter_score_with=5 # defaults to None(means all score)
         )
         #nlp = spacy.load("en_core_web_trf")
@@ -64,16 +64,23 @@ class NLP(APIView):
                 # lang='en', # defaults to 'en'
                 # country='us', # defaults to 'us'
                 # sort=Sort.NEWEST, # defaults to Sort.NEWEST
-                # count=100, # defaults to 100
+                count=300, # defaults to 100
                 # filter_score_with=5 # defaults to None(means all score)
             )
-            sia = SentimentIntensityAnalyzer()
-            sentiment = []
-            overall = 0
-            for review in result:
-                score = sia.polarity_scores(review['content'])['compound']
-                sentiment.append(score)
-                overall += score
-            overall = overall * 100 / len(sentiment) # sentiment %
-            return Response({"polarity": overall}, status=status.HTTP_200_OK)
 
+            sia = SentimentIntensityAnalyzer()
+            sentiment_scores = defaultdict(list)
+            for review in reversed(result):
+                day = review['at'].strftime('%Y-%m-%d')
+                score = sia.polarity_scores(review['content'])['compound']
+                sentiment_scores[day].append(score)
+
+            sentiment_scores_average = {key:sum(values)/len(values) for key, values in sentiment_scores.items()}
+
+            sentiment_data_average_list = []
+            for key, value in sentiment_scores_average.items():
+                sentiment_data_average_list.append({'date': key, 'sentiment': round(value, 2)})
+            
+            final_sentiments = {'sentiments': sentiment_data_average_list}
+            print(final_sentiments)
+            return Response({"text": json.dumps(final_sentiments)}, status=status.HTTP_200_OK)
