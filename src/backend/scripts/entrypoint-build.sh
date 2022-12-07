@@ -1,5 +1,5 @@
 #!/bin/bash
-cd backend
+cd src/backend
 
 python manage.py wait_for_db
 
