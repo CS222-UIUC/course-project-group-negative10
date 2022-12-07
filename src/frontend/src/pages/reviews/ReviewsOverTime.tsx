@@ -20,7 +20,7 @@ function ReviewsOverTime() {
             <Line type="monotone" dataKey="rating" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <XAxis dataKey="date" />
-            <YAxis dataKey="rating" />
+            <YAxis dataKey="rating" domain={[0, 5]}/>
             <Tooltip />
         </LineChart>
     </ResponsiveContainer>
