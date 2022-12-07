@@ -14,7 +14,7 @@ function ViewReviews() {
   const handleSubmit = () => {
     axios.get(`/api/NLP?text=${textInput}`).then((res: any) => {
       console.log(res.data.polarity);
-      setOutput(JSON.parse((res.data.polarity)));
+      setOutput(res.data.polarity);
     }).catch((err: any) => console.log(err));
   };
 
@@ -30,6 +30,7 @@ function ViewReviews() {
           onChange={(e) => setTextInput(e.target.value)}
         />
         <button onClick={handleSubmit}>Submit</button>
+        <h3>{output}</h3>
       </div>
     </header>
   </div>

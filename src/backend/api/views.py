@@ -7,7 +7,9 @@ import datetime
 import json
 from bs4 import BeautifulSoup
 import requests
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
+nltk.download('vader_lexicon')
 
 class SimpleAPIView(APIView):
     def get(self, request):
@@ -49,14 +51,22 @@ class getReviews(APIView):
 class NLP(APIView):
     def get(self, request):
             app_name = request.query_params.get('text', '')
-            result = reviews_all(
-                app_name,
-                sleep_milliseconds=0, # defaults to 0
-                lang='en', # defaults to 'en'
-                country='us', # defaults to 'us'
-                sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
+            # result = reviews_all(
+                # app_name,
+                # sleep_milliseconds=0, # defaults to 0
+                # lang='en', # defaults to 'en'
+                # country='us', # defaults to 'us'
+                # sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
                 #filter_score_with=5 defaults to None(means all score)
-            )  
+            # )
+            result, continuation_token = reviews(
+                app_name,
+                # lang='en', # defaults to 'en'
+                # country='us', # defaults to 'us'
+                # sort=Sort.NEWEST, # defaults to Sort.NEWEST
+                # count=100, # defaults to 100
+                # filter_score_with=5 # defaults to None(means all score)
+            )
             sia = SentimentIntensityAnalyzer()
             sentiment = []
             overall = 0
@@ -64,8 +74,6 @@ class NLP(APIView):
                 score = sia.polarity_scores(review['content'])['compound']
                 sentiment.append(score)
                 overall += score
-
             overall = overall * 100 / len(sentiment) # sentiment %
-
             return Response({"polarity": overall}, status=status.HTTP_200_OK)
 
