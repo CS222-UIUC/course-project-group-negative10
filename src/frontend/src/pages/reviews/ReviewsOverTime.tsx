@@ -3,16 +3,16 @@
 import {useState} from 'react';
 import axios from "axios";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip} from 'recharts';
-import { DataGrid } from '@mui/x-data-grid';
+import DatePicker from 'react-date-picker';
 
 function ReviewsOverTime() {
 
   type Props = {};
-
-
   const [textInput, setTextInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
   const [myData, setMyData] = useState();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const renderLineChart = (
     <ResponsiveContainer width="100%" height={400}>
@@ -27,7 +27,7 @@ function ReviewsOverTime() {
   );
 
   const handleSubmit = () => {
-    axios.get(`/api/getReviews?text=${textInput}`).then((res: any) => {
+    axios.get(`/api/getReviews?appName=${textInput}&startDate=${startDate.getFullYear() + "-" + (startDate.getMonth()+1) + "-" +   startDate.getDate()}&endDate=${endDate.getFullYear() + "-" + (endDate.getMonth()+1) + "-" +   endDate.getDate()}`).then((res: any) => {
       console.log(res.data.text);
       setMyData(JSON.parse((res.data.text))['reviews']);
     }).catch((err: any) => console.log(err));
@@ -37,6 +37,8 @@ function ReviewsOverTime() {
       <div className="App">
       <header className="App-header">
         <div>
+        From: <DatePicker onChange={setStartDate} value={startDate} />
+        To: <DatePicker onChange={setEndDate} value={endDate} />
           {renderLineChart}
           <label htmlFor="char-input">Get reviews for app (ex: com.ticktick.task): </label>
           <input
