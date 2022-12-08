@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import axios from "axios";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip} from 'recharts';
+import DatePicker from 'react-date-picker';
 
 function SentimentAnalysis() {
   type Props = {};
@@ -8,6 +9,8 @@ function SentimentAnalysis() {
   const [textInput, setTextInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
   const [myData, setMyData] = useState();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const renderLineChart = (
     <ResponsiveContainer width="100%" height={400}>
@@ -22,7 +25,7 @@ function SentimentAnalysis() {
   );
   
   const handleSubmit = () => {
-    axios.get(`/api/NLP?text=${textInput}`).then((res: any) => {
+    axios.get(`/api/NLP?appName=${textInput}&startDate=${startDate.getFullYear() + "-" + (startDate.getMonth()+1) + "-" +   startDate.getDate()}&endDate=${endDate.getFullYear() + "-" + (endDate.getMonth()+1) + "-" +   endDate.getDate()}`).then((res: any) => {
       console.log(res.data.text);
       setMyData(JSON.parse((res.data.text))['sentiments']);
     }).catch((err: any) => console.log(err));
@@ -32,6 +35,8 @@ function SentimentAnalysis() {
     <div className="App">
     <header className="App-header">
       <div>
+        From: <DatePicker onChange={setStartDate} value={startDate} />
+        To: <DatePicker onChange={setEndDate} value={endDate} />
         {renderLineChart}
         <label htmlFor="char-input">Sentiment analysis on reviews for app (ex: com.ticktick.task): </label>
         <input
