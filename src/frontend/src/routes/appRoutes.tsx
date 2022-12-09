@@ -2,6 +2,7 @@ import ReviewsPageLayout from "../pages/reviews/ReviewsPageLayout";
 import HomePage from "../pages/home/HomePage";
 import { RouteType } from "./config";
 import ReviewsOverTime from "../pages/reviews/ReviewsOverTime";
+import ReviewBrowser from "../pages/reviews/ReviewBrowser";
 import SettingsPage from "../pages/settings/SettingsPage";
 import SentimentAnalysis from "../pages/reviews/SentimentAnalysis";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
@@ -49,6 +50,14 @@ const appRoutes: RouteType[] = [
         state: "dashboard.SentimentAnalysis",
         sidebarProps: {
           displayText: "Sentiment Analysis"
+        }
+      },
+      {
+        path: "/reviews/ReviewBrowser",
+        element: <ReviewBrowser />,
+        state: "dashboard.ReviewBrowser",
+        sidebarProps: {
+          displayText: "Review Browser"
         }
       }
     ]

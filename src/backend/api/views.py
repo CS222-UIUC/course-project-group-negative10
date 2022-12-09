@@ -2,8 +2,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from google_play_scraper import app, reviews, Sort, reviews_all
+from google_play_scraper.features.reviews import _ContinuationToken
+
 from app_store_scraper import AppStore
 from collections import defaultdict
+from django.core.serializers.json import DjangoJSONEncoder
 import datetime
 import json
 from bs4 import BeautifulSoup
@@ -209,6 +212,18 @@ class appDetails(APIView):
             histogram_list.append({'rating': i+1, 'count': result['histogram'][i]})
         result['histogram'] = histogram_list
         return Response({"text": json.dumps(result)}, status=status.HTTP_200_OK)
+
+class getRawReviews(APIView):
+    def get(self, request):       
+        app_name = request.query_params.get('appName', '')
+        continuation_token = request.query_params.get('continuationToken', '')
+        if continuation_token == "undefined":
+            continuation_token = None
+        else:
+            continuation_token = _ContinuationToken(continuation_token, 'en', 'us', Sort.NEWEST, count=30, filter_score_with=None)
+        result, new_continuation_token = reviews(app_name, continuation_token=continuation_token, count=30)
+        final = {'reviews': result, 'continuationToken': new_continuation_token.token}
+        return Response({"text": json.dumps(final, cls=DjangoJSONEncoder)}, status=status.HTTP_200_OK)
 
 
         
