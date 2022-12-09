@@ -8,7 +8,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import MyAppsPage from "../pages/myapps/MyAppsPage";
+import AppDetails from "../pages/myapps/AppDetails";
 import DownloadsPage from "../pages/downloads/DownloadsPage";
 
 const appRoutes: RouteType[] = [
@@ -19,10 +19,10 @@ const appRoutes: RouteType[] = [
   },
   {
     path: "/myapps",
-    element: <MyAppsPage />,
+    element: <AppDetails />,
     state: "myapps",
     sidebarProps: {
-      displayText: "My Apps",
+      displayText: "App Details",
       icon: <FileDownloadOutlinedIcon />
     }
   },

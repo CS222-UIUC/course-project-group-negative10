@@ -200,4 +200,15 @@ class NLP(APIView):
         elif store == "App Store":
             return AppStoreNLP(app_name, startDate, endDate)
 
+class appDetails(APIView):
+    def get(self, request):       
+        app_name = request.query_params.get('appName', '')
+        result = app(app_name)
+        histogram_list = []
+        for i in reversed(range(len(result['histogram']))):
+            histogram_list.append({'rating': i+1, 'count': result['histogram'][i]})
+        result['histogram'] = histogram_list
+        return Response({"text": json.dumps(result)}, status=status.HTTP_200_OK)
+
+
         
