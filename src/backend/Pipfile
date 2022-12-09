@@ -16,6 +16,7 @@ dj-database-url = "*"
 whitenoise = "*"
 gunicorn = "*"
 google-play-scraper = "*"
+app-store-scraper = "*"
 nltk = "*"
 beautifulsoup4 = "*"
 
