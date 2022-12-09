@@ -16,8 +16,10 @@ dj-database-url = "*"
 whitenoise = "*"
 gunicorn = "*"
 google-play-scraper = "*"
+app-store-scraper = "*"
 nltk = "*"
 beautifulsoup4 = "*"
+js2py = "*"
 
 [dev-packages]
 coverage = "*"
