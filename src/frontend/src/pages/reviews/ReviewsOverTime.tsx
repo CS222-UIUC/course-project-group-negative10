@@ -13,6 +13,11 @@ function ReviewsOverTime() {
   const [myData, setMyData] = useState();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [storeOption, setStoreOption] = useState("Play Store");
+
+  const handleDropdownChange = (e: any) => {
+    setStoreOption(e.target.value);
+  };
 
   const renderLineChart = (
     <ResponsiveContainer width="100%" height={400}>
@@ -27,7 +32,7 @@ function ReviewsOverTime() {
   );
 
   const handleSubmit = () => {
-    axios.get(`/api/getReviews?appName=${textInput}&startDate=${startDate.getFullYear() + "-" + (startDate.getMonth()+1) + "-" +   startDate.getDate()}&endDate=${endDate.getFullYear() + "-" + (endDate.getMonth()+1) + "-" +   endDate.getDate()}`).then((res: any) => {
+    axios.get(`/api/getReviews?appName=${textInput}&startDate=${startDate.getFullYear() + "-" + (startDate.getMonth()+1) + "-" +   startDate.getDate()}&endDate=${endDate.getFullYear() + "-" + (endDate.getMonth()+1) + "-" +  endDate.getDate()}&store=${storeOption}`).then((res: any) => {
       console.log(res.data.text);
       setMyData(JSON.parse((res.data.text))['reviews']);
     }).catch((err: any) => console.log(err));
@@ -39,6 +44,7 @@ function ReviewsOverTime() {
         <div>
         From: <DatePicker onChange={setStartDate} value={startDate} />
         To: <DatePicker onChange={setEndDate} value={endDate} />
+
           {renderLineChart}
           <label htmlFor="char-input">Get reviews for app (ex: com.ticktick.task): </label>
           <input
@@ -46,6 +52,11 @@ function ReviewsOverTime() {
             onChange={(e) => setTextInput(e.target.value)}
           />
           <button onClick={handleSubmit}>Submit</button>
+          <br></br>
+          <select value={storeOption} onChange={handleDropdownChange}>
+            <option value="Play Store">Play Store</option>
+            <option value="App Store">App Store</option>
+          </select>
         </div>
       </header>
     </div>
