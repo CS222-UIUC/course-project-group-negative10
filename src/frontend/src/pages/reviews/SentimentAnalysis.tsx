@@ -23,7 +23,7 @@ function SentimentAnalysis() {
             <Line type="monotone" dataKey="sentiment" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <XAxis dataKey="date" />
-            <YAxis dataKey="Sentiment Score" domain={[0, 1]} />
+            <YAxis dataKey="Sentiment Score" domain={[-1, 1]} />
             <Tooltip />
         </LineChart>
     </ResponsiveContainer>
