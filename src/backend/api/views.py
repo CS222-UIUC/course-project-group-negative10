@@ -3,9 +3,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from google_play_scraper import app, reviews, Sort, reviews_all
 from google_play_scraper.features.reviews import _ContinuationToken
-
 from app_store_scraper import AppStore
-from collections import defaultdict
+from collections import defaultdict,OrderedDict
 from django.core.serializers.json import DjangoJSONEncoder
 import datetime
 import json
@@ -76,13 +75,18 @@ def PlayStoreRatings(app_name, startDate, endDate):
 
 def AppStoreRatings(appname, startDate, endDate):
     app = AppStore(country="us", app_name=appname)
-    app.review(how_many=20)
+    app.review(how_many=20,after=startDate)
     result = app.reviews
     review_data = defaultdict(list)
-    for review in reversed(result):
+    for review in result:
         day = review['date'].strftime('%Y-%m-%d')
         review_data[day].append(review['rating'])
+    
+    data = defaultdict(list)
+    for key in sorted(review_data.keys()):
+        data[key] = (review_data[key])
 
+    review_data = data
     review_data_average = {
         key: sum(values)/len(values) for key, values in review_data.items()}
 
@@ -94,7 +98,7 @@ def AppStoreRatings(appname, startDate, endDate):
     return Response({"text": json.dumps(final_reviews)}, status=status.HTTP_200_OK)
 def AppStoreNLP(appname,startDate,endDate):
     app = AppStore(country="us", app_name=appname)
-    app.review(how_many=20)
+    app.review(how_many=20,after=startDate)
     result = app.reviews
     sia = SentimentIntensityAnalyzer()
     sentiment_scores = defaultdict(list)
@@ -102,7 +106,13 @@ def AppStoreNLP(appname,startDate,endDate):
         day = review['date'].strftime('%Y-%m-%d')
         score = sia.polarity_scores(review['review'])['compound']
         sentiment_scores[day].append(score)
-
+    print(sentiment_scores)
+    data = defaultdict(list)
+    for key in sorted(sentiment_scores.keys()):
+        data[key]=sentiment_scores[key]
+    
+    sentiment_scores = data
+    print(sentiment_scores)
     sentiment_scores_average = {
         key: sum(values)/len(values) for key, values in sentiment_scores.items()}
 
