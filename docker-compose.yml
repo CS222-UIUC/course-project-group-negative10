@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  backend:
+    container_name: backend
+    build: ./src/backend
+    volumes:
+      - ./src/backend:/app/src/backend
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.dev
+
+  frontend:
+    container_name: frontend
+    build: ./src/frontend
+    volumes:
+      - ./src/frontend:/app/src/frontend
+      - node-modules:/app/src/frontend/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - backend
+
+  db:
+    container_name: db
+    image: postgres:14.0-alpine
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
+  node-modules:
