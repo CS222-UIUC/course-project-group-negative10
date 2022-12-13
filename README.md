@@ -2,8 +2,34 @@
 
 # Comp
 
-Developers aren’t always aware of how their app is performing in comparison to their competitors. Our website will allow app developers to track how their app is performing on the app store by ranking the app amongst its competitors based on certain keywords. 
+Developers aren’t always aware of how their app is performing in comparison to their competitors and regarding changes they have made. Our tool allows app developers to track ratings and sentiment over time for their app, allowing them to pinpoint certain updates that improved user experience and those that hurt it. It also allows them to manually browse reviews themselves and view their review distribution. It supports both the play store and the apple app stoer.
 
+##  Technical Architecture 
+ ![image](https://user-images.githubusercontent.com/20406065/207214225-4316c082-29b4-4d03-ba7c-673b0f30ebd1.png)
+
+##  Installation Instructions
+  - Clone the project
+  - Run ```docker-compose up --build``` in the main directory
+  - Visit http://localhost:3000/
+  - Project is also hosted live on https://comp-222.herokuapp.com/
+  
+## Roles
+Batuhan:
+ - Created template website
+ - Created the frontend UI
+ - Added ability to view reviews over time (Play Store)
+ - Added ability to view details about an app (Play Store)
+ - Added a review browser with infinite scrolling
+
+Charleston:
+ - Setup github actions for tests and a linter
+ - Added sentiment analysis
+ - Added app store support (For reviews over time and sentiment analysis)
+
+Ashley:
+ - Created the design of the frontend UI
+ - Completed the final presentation
+ 
 ## Functionality
 - Users can see what place their app ranks on certain keywords
 - Users can see how their competitors rank on certain keywords
