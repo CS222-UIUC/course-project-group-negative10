@@ -5,8 +5,8 @@
 Developers aren’t always aware of how their app is performing in comparison to their competitors and regarding changes they have made. Our tool allows app developers to track ratings and sentiment over time for their app, allowing them to pinpoint certain updates that improved user experience and those that hurt it. It also allows them to manually browse reviews themselves and view their review distribution. It supports both the play store and the apple app stoer.
 
 ##  Technical Architecture 
- ![image](https://user-images.githubusercontent.com/20406065/207214225-4316c082-29b4-4d03-ba7c-673b0f30ebd1.png)
-
+![image](https://user-images.githubusercontent.com/20406065/207224513-95f5e9be-b2df-434b-8ad9-07701dbf4be0.png)
+The backend runs on Django (Python) and the frontend runs on React. We treat Django like an api, whenever we need information about an app we request it from Django which does all the information scraping and processing and then sends it back to the frontend, where it is displayed.
 ##  Installation Instructions
   - Clone the project
   - Run ```docker-compose up --build``` in the main directory
