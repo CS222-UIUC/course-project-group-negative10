@@ -1,4 +1,5 @@
 ![Tests](https://github.com/CS222-UIUC/course-project-group-negative10/actions/workflows/django.yml/badge.svg)
+*note: commit history accidentally overwritten. see below for individual contributions*
 
 # Comp
 
